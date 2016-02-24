@@ -3,13 +3,12 @@ package app.negocio;
 import org.springframework.stereotype.Component;
 
 /**
- * @author LuisJArellano
+ * @author arellano84
  * @version 20150403
  * 
  * Clase de Operaciones de Calculadora Basica.
  * 
- * JAVOL14_3
- * Módulo 5 Spring MVC y Spring WebFlow
+ * Módulo Spring WebFlow
  */
 
 @Component(value="calc")

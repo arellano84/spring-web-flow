@@ -5,13 +5,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
- * @author LuisJArellano
+ * @author arellano84
  * @version 20150403
  * 
  * Clase Controller de Calculadora Basica.
  * 
- * JAVOL14_3
- * Módulo 5 Spring MVC y Spring WebFlow
+ * Módulo Spring WebFlow
  */
 
 @Controller
