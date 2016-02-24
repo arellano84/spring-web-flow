@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow
+        http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+
+	<input name="ope" />
+	<input name="divisor"/>
+	
+	<decision-state id="esDivision">
+		<if test="calc.esDivision(ope)"
+		    then="comprobarDivisor" else="finSubflujo" />
+		<on-exit>
+			<set name="flowScope.nuevo" value="divisor"
+			     type="double" />
+		</on-exit>    
+	</decision-state>
+	
+	<action-state id="comprobarDivisor">
+		<evaluate expression="calc.comprobarDivisor(divisor)" 
+		          result-type="double" result="flowScope.nuevo"/>
+		<transition to="estaCambiado"/>
+	</action-state>
+	
+	<decision-state id="estaCambiado">
+		<if  test="calc.isCambiado()" 
+		     then="mostrarMsg" else="finSubflujo"/>
+	</decision-state>
+	
+	<view-state id="mostrarMsg" view="mensajeCambio">
+		<transition on="ok2" to="finSubflujo" />
+	</view-state>
+	
+	<end-state id="finSubflujo">
+		<output name="nuevo"/>
+	</end-state>
+
+</flow>

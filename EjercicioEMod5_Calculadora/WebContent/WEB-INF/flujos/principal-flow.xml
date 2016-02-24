@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow
+        http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
+        start-state="entrada">
+
+	<view-state id="entrada" view="inicio">
+		<transition on="ok1" to="guardarN1" />
+	</view-state>
+	
+	<action-state id="guardarN1">
+		<evaluate expression="requestParameters.num1"
+		          result-type="double" result="flowScope.n1" />
+		<transition to="guardarN2"/>          
+	</action-state>
+	
+	<action-state id="guardarN2">
+		<evaluate expression="requestParameters.num2"
+		          result-type="double" result="flowScope.n2" />
+		<transition to="guardarOp"/>          
+	</action-state>
+	
+	<action-state id="guardarOp">
+		<evaluate expression="requestParameters.op"
+		          result-type="string" 
+		          result="flowScope.operacion" />
+		<transition to="entradaSubflujo"/>          
+	</action-state>
+	
+	<subflow-state id="entradaSubflujo" subflow="subflujo">
+		<input name="ope" type="string" 
+		       value="flowScope.operacion" />
+		<input name="divisor" type="double" 
+		       value="flowScope.n2" />
+		<output name="nuevo" type="double"/> 
+		<transition to="procesar"/>      
+	</subflow-state>
+	
+	<action-state id="procesar">
+		<evaluate expression="calc.calcular(n1,nuevo,operacion)" 
+		          result-type="double" result="flowScope.resultado" />
+		   <transition to="fin" />
+	</action-state>
+	
+	<end-state id="fin" view="final" />
+
+</flow>
